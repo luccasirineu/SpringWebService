@@ -15,7 +15,7 @@ import com.luccasdev.project.repositories.UserRepository;
 public class TestConfig implements CommandLineRunner { // implementa uma interface que tem um metodo que sera iniciado tudo o que estiver dentro dele ao rodar o programa
 
 
-	@Autowired // serve para fzr a injecao de independencia de forma automatica
+	@Autowired // serve para fzr a injecao de dependencia de forma automatica
 	private UserRepository userRepository;
 
 	@Override
