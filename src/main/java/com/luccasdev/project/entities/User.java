@@ -3,9 +3,20 @@ package com.luccasdev.project.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+
+@Entity // serve para dizer que está classe é uma entidade
+@Table(name = "tb_user") // serve para que no banco de dados esta classe ira se chamar tb_user
 public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	@Id // serve para dizer que está sera a PK do bd
+	@GeneratedValue(strategy= GenerationType.IDENTITY) // serve para dizer que o id é autoincrementavel
 	private Long id;
 	private String name;
 	private String email;
