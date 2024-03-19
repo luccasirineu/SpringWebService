@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.luccasdev.project.enums.OrderStatus;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +28,9 @@ public class Order implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
 	
+	
+	private int orderStatus;
+	
 	@ManyToOne // para dizer q a associacao entre order e client é de muitos para um
 	@JoinColumn(name = "client_id") // para dizer qual sera o nome da chave estrangeira
 	private User client; // Muitos para um
@@ -36,10 +40,11 @@ public class Order implements Serializable {
 	
 	
 	
-	public Order(Long id, Instant moment, User client) {
+	public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
 		
 		this.id = id;
 		this.moment = moment;
+		setOrderStatus(orderStatus);
 		this.client = client;
 	}
 
@@ -59,6 +64,18 @@ public class Order implements Serializable {
 
 	public Instant getMoment() {
 		return moment;
+	}
+
+
+
+	public OrderStatus getOrderStatus() {
+		return OrderStatus.valueof(orderStatus);
+	}
+
+
+
+	public void setOrderStatus(OrderStatus orderStatus) {
+		this.orderStatus = orderStatus.getCode();
 	}
 
 
