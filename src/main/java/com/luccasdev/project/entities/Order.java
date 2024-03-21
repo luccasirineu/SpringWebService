@@ -2,7 +2,9 @@ package com.luccasdev.project.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.luccasdev.project.enums.OrderStatus;
@@ -13,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -35,7 +38,9 @@ public class Order implements Serializable {
 	@JoinColumn(name = "client_id") // para dizer qual sera o nome da chave estrangeira
 	private User client; // Muitos para um
 
-
+	@OneToMany(mappedBy = "id.order") // pois é no id da classe OrderItem que esta o pedido(order)
+	private Set<OrderItem> items = new HashSet<>();
+	
 	public Order() {}
 	
 	
@@ -98,6 +103,10 @@ public class Order implements Serializable {
 
 
 
+	public Set<OrderItem>getItems(){
+		return items;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
