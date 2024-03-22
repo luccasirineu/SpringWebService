@@ -15,6 +15,7 @@ import com.luccasdev.project.entities.Product;
 import com.luccasdev.project.entities.User;
 import com.luccasdev.project.enums.OrderStatus;
 import com.luccasdev.project.repositories.CategoryRepository;
+import com.luccasdev.project.repositories.OrderItemRepository;
 import com.luccasdev.project.repositories.OrderRepository;
 import com.luccasdev.project.repositories.ProductRepository;
 import com.luccasdev.project.repositories.UserRepository;
@@ -35,6 +36,9 @@ public class TestConfig implements CommandLineRunner { // implementa uma interfa
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -73,6 +77,8 @@ public class TestConfig implements CommandLineRunner { // implementa uma interfa
 		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
 		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+
 
 
 		
