@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.luccasdev.project.entities.User;
 import com.luccasdev.project.repositories.UserRepository;
+import com.luccasdev.project.services.exceptions.ResourceNotFoundException;
 
 
 @Service // para dizer que essa classe é de serviço, podendo assim outras classes dependerem dessa
@@ -23,7 +24,8 @@ public class UserService {
 	
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id)); // ele tenta dar o get e caso nao consiga, lancara essa exceção
+		
 	}
 	
 	public User insert(User obj) {
