@@ -12,6 +12,8 @@ import com.luccasdev.project.entities.User;
 import com.luccasdev.project.repositories.UserRepository;
 import com.luccasdev.project.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 
 @Service // para dizer que essa classe é de serviço, podendo assim outras classes dependerem dessa
 public class UserService {
@@ -45,10 +47,13 @@ public class UserService {
 	}
 	
 	public User update(Long id, User obj) {
+		try {
 		User entity = repository.getReferenceById(id); // prepara o objeto, sem acessar ao banco de dados
 		updateData(entity, obj);
 		return repository.save(entity); // agora ele salva no banco de dados
-		
+		}catch(EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(User entity, User obj) {
