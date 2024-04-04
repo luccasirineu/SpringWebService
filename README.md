@@ -7,7 +7,7 @@
 Spring Web Service é uma aplicação back end, na qual teremos o Produto, Usuário e Pedido, fazendo interações e operações de CRUD(Create, Read, Update, Delete) entre eles. 
 
 
-##Objetivos
+## Objetivos
 - Criar projeto Spring Boot Java
 - Implementar modelo de domínio
 - Estruturar camadas lógicas: resource, service, repository
